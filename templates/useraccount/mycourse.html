@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} MyCourse | E-learning {% endblock %}
+{% block heads %}
+<link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block page %}
+<!-- Index Page start -->
+<div class="page">
+    <div class="container">
+        <div class="useraccount-container">
+            {% if messages %}
+            <ul class="form-message" style="margin-top: 45px;">
+                {% for item in messages %}
+                <li class="{{ item.tags }}"> {{ item }} </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if not courses%}
+            <center>
+                <h1 class="index-heading">You have not enrolled any course yet, Take a course first.</h1>
+                <a href="{% url 'index' %}" class="unibutton">Enroll</a>
+            </center>
+            {% else %}
+            <div class="ua-section-header">
+                <h2>My Courses</h2>
+            </div>
+            <div class="ua-order-table">
+                <div class="pricing-wrapper">
+                    <div class="pricing-item ua-table">
+                        <div class="pricing-element" style="color: white; ">
+                            <p>Course Title</p>
+                            <p>Enroll Date</p>
+                            <p>Enroll Type</p>
+                            <p>Total Marks</p>
+                        </div>
+                        {% for item in courses %}
+                        <div class="pricing-element">
+                            {% if item.status == 'done' %}
+                            <p>{{ item.course }}</p>
+                            {% else %}
+                            <p><a href="{% url 'video' course_id=item.course.id topics_id=1 %}"
+                                    class="courselink">{{ item.course }}</a></p>
+                            {% endif %}
+                            {% if item.status == 'done' %}
+                            <p style="color:grey;">{{ item.created_at }}</p>
+                            {% else %}
+                            <p>{{ item.created_at }}</p>
+                            {% endif %}
+                            <p>{{ item.enroll_type }}</p>
+                            <p>{{ item.total_marks }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div> <!-- ua container end -->
+    </div>
+</div> <!-- Index page end -->
+{% endblock %}
+
+{% block scripts %}
+<!-- slider image -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"> </script>
+<script>
+    $(document).ready(function () {
+        $(".carousel-inner").owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                600: {
+                    items: 1,
+                },
+                1000: {
+                    items: 1,
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

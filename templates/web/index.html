@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Index | E-learning {% endblock %}
+{% block heads %}
+{% endblock %}
+
+{% block page %}
+<!-- Index Page start -->
+<div class="page">
+    <div class="container">
+        <div class="classroom">
+            <main>
+                <!-- <h4>Select a Department</h4></br> -->
+                {% if messages %}
+                <ul class="form-message">
+                    {% for item in messages %}
+                    <li class="{{ item.tags }}"> {{ item }} </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <!-- <ol class="gradient-list">
+                    {% for item in departments %}
+                    <li><a href="{% url 'course' department_id=item.id %}" style="color: inherit;">{{item.name}}</a>
+                    </li>
+                    {% endfor %}
+                </ol> -->
+            </main>
+        </div>
+        <div class="basic-pricing">
+            <h2 class="t-border-btm">Select a course</h2>
+            <div class="basic-pricing-wrapper">
+                {% for item in departments %}
+                <div class="basic-p-item" onclick="location.href='{% url 'course' department_id=item.id %}';">
+                    <div class="basic-p-item-title">
+                        <h4>{{ item.name }}</h4>
+                    </div>
+                    <div class="basic-p-item-image">
+                        <img src="{{ item.image.url }}" alt="">
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div> <!-- Index page end -->
+{% endblock %}
+
+{% block scripts %}
+<!-- slider image -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"> </script>
+<script>
+    $(document).ready(function () {
+        $(".carousel-inner").owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                600: {
+                    items: 1,
+                },
+                1000: {
+                    items: 1,
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

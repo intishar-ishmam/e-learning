@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Video | E-learning {% endblock %}
+{% block heads %}
+<link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block page %}
+<!-- Index Page start -->
+<div class="page">
+    <div class="container">
+        <div class="classroom">
+            <a href="{% url 'smartbook' course_id=course_id topics_id=1 %}" class="unibutton">Smartbook</a>
+            <a href="{% url 'video' course_id=course_id  topics_id=1 %}" class="unibutton">Video</a>
+            <a href="{% url 'quiz' course_id=course_id  exam_type='mid-term' %}" class="unibutton">Quiz</a>
+            <div class="classroom-wrapper">
+                <div class="class-topics">
+                    <ul class="smartbook-list">
+                        {% for item in video %}
+                        <a href="{% url 'video' course_id=course_id topics_id=item.id %}">
+                            <li>{{item.title}}
+                            </li>
+                        </a>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="class-content">
+                    {% for item in videocontent %}
+                    <h4>{{item.title}}</h4>
+                    {{item.urls | safe}}
+                    </iframe>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- Index page end -->
+{% endblock %}
+
+{% block scripts %}
+<!-- slider image -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"> </script>
+<script>
+    $(document).ready(function () {
+        $(".carousel-inner").owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                600: {
+                    items: 1,
+                },
+                1000: {
+                    items: 1,
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

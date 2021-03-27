@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Enroll | E-learning {% endblock %}
+{% block heads %}
+{% endblock %}
+
+{% block page %}
+<!-- Index Page start -->
+<div class="page">
+    <div class="container">
+        <div class="holder">
+            {% if messages %}
+            <ul class="form-message" style="margin: 20px 0;">
+                {% for item in messages %}
+                <li class="{{ item.tags }}"> {{ item }} </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <h4>Course Title: <i>{{course.course_title}}</i></h4>
+            <p>Total videos: {{video}}
+                </br>
+                Total smartbook: {{smartbook}}
+            </p>
+            <a href="{% url 'addcourse' course_id=course.id %}" class="unibutton">Enroll</a>
+        </div>
+    </div>
+</div> <!-- Index page end -->
+{% endblock %}
+
+{% block scripts %}
+<!-- slider image -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"> </script>
+<script>
+    $(document).ready(function () {
+        $(".carousel-inner").owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                600: {
+                    items: 1,
+                },
+                1000: {
+                    items: 1,
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
