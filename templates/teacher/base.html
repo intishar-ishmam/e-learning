@@ -39,6 +39,7 @@
                         <ul class="desktop">
                             <li><a href="{% url 'teacher-index' %}">Home</a></li>
                             <li><a href="https://www.bubt.edu.bd" target="_blank">BUBT</a></li>
+                            <li><a href="{% url 'teacher-index' %}">TEACHER</a></li>
                         </ul>
                         {% if request.session.teacher_id %}
                         <ul class="mobile">
@@ -50,6 +51,7 @@
                         <ul class="mobile">
                             <li><a href="{% url 'teacher-index' %}">Home</a></li>
                             <li><a href="https://www.bubt.edu.bd" target="_blank">BUBT</a></li>
+                            <li><a href="{% url 'teacher-index' %}">TEACHER</a></li>
                             <li><a href="{% url 'teacher-login' %}">Login</a></li>
                         </ul>
                         {% endif %}

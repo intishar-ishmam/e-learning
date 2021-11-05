@@ -170,3 +170,7 @@ def smartbook_delete(request, smartbook_id, course_id):
     except:
         messages.error(request, "Smartbook not found")
         return redirect('smartbook-display', course_id=course_id)
+
+
+def quiz_display(request):
+    return None
