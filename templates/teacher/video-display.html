@@ -1,0 +1,74 @@
+{% extends 'teacher/base.html' %}
+{% load static %}
+{% block title %} Edit | E-Learning {% endblock %}
+{% block heads %}
+{% endblock %}
+
+{% block page %}
+<!-- Index Page start -->
+<div class="page">
+    <div class="container">
+        <div class="basic-pricing">
+            <h2 class="t-border-btm">All Videos</h2>
+        {% if messages %}
+                <ul class="form-message" style="width:400px;">
+                    {% for item in messages %}
+                    <li class="{{ item.tags }}"> {{ item }} </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            <div class="basic-pricing-wrapper">
+
+                {% for item in videos %}
+                <div class="basic-p-item b-course" onclick="location.href='{% url 'video-edit' video_id=item.id course_id=course_id %}';">
+                    <div class="basic-p-item-title b-course-title">
+                        <h4>{{ item.title }}</h4>
+                    </div>
+                    <div class="basic-p-item-image b-course-image">
+                        <img src="{% static 'image/video_edit.png' %}"
+                            alt="">
+                    </div>
+                </div>
+                {% endfor %}
+            <div class="basic-p-item b-course" onclick="location.href='{% url 'video-add' course_id=course_id %}';">
+                    <div class="basic-p-item-title b-course-title">
+                        <h4>Add New Video</h4>
+                    </div>
+                    <div class="basic-p-item-image b-course-image">
+                        <img src="https://cdn3.iconfinder.com/data/icons/eightyshades/512/14_Add-512.png"
+                            alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div> <!-- Index page end -->
+{% endblock %}
+
+{% block scripts %}
+<!-- slider image -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"> </script>
+<script>
+    $(document).ready(function () {
+        $(".carousel-inner").owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                600: {
+                    items: 1,
+                },
+                1000: {
+                    items: 1,
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

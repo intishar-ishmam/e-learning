@@ -1,0 +1,31 @@
+{% extends 'teacher/base.html' %}
+{% block title %} Login | E-Learning {% endblock %}
+
+
+    {% block page %}
+    <!-- page -->
+    <div class="page">
+        <div class="container">
+            <div class="useraccount-container">
+                <div class="ua-quote register-form">
+                    <h2>Teacher Log in</h2>
+                    {% if messages %}
+                    <ul class="form-message">
+                        {% for item in messages %}
+                                <li class="{{ item.tags }}"> {{ item }} </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <form action="{% url 'teacher-login' %}"  method="post">
+                        {% csrf_token %}
+                        <label for="ID">Email</label>
+                        <input type="email" name="email" required>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" required>
+                        <input type="submit" name="submit" value="LOGIN" class="submit">
+                    </form>
+                </div>
+            </div> <!-- ua container end -->
+        </div>
+    </div>
+    {% endblock %}

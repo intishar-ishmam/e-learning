@@ -1,0 +1,36 @@
+{% extends 'teacher/base.html' %}
+{% block title %} Register | E-Learning {% endblock %}
+
+{% block page %}
+<!-- page -->
+<div class="page">
+    <div class="container">
+        <div class="">
+            <div class="ua-quote register-form" style="max-width: 100%;">
+                <h2>Videos</h2>
+                {% if messages %}
+                <ul class="form-message">
+                    {% for item in messages %}
+                    <li class="{{ item.tags }}"> {{ item }} </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="{% url 'smartbook-edit' smartbook_id=smartbook.id course_id=course_id %}" method="post">
+                    {% csrf_token %}
+                    <label for="title">Title</label>
+                    <input type="text" name="title" value="{{ smartbook.title }}" required>
+                    <input type="hidden" name="course" value="{{ smartbook.course.id }}" required>
+                    <label for="chapter">Chapter*</label>
+                    <input type="number" name="chapter" value="{{ smartbook.chapter }}" required>
+                    <label for="url">Content*</label>
+                    {{ form.media }}
+                    {{ form | safe }}
+                    <input type="submit" class="submit" name="Save" value="Save Smartbook">
+                </form>
+            </div>
+        <br>
+            <a href="{% url 'smartbook-delete' smartbook_id=smartbook.id course_id=course_id %}"><h4 style="color:#ee0000; float:right">Delete</h4></a>
+        </div> <!-- ua container end -->
+    </div>
+</div>
+{% endblock %}

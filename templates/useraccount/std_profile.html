@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Profile | E-Learning {% endblock %}
+{% block heads %}
+<link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block page %}
+<!-- Index Page start -->
+<div class="page">
+    <div class="container">
+        <div class="useraccount-container">
+            <div class="ua-quote register-form">
+                <h2>Profile / Edit Profile</h2>
+                {% if messages %}
+                <ul class="form-message">
+                    {% for item in messages %}
+                    <li class="{{ item.tags }}"> {{ item }} </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="{% url 'profile' %}" method="post">
+                    {% csrf_token %}
+                    <label for="First_Name">First Name*</label>
+                    <input type="text" name="first_name" value="{{profile.first_name | default_if_none:''}}" required>
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" value="{{profile.last_name | default_if_none:''}}">
+                    <label for="email">Email*</label>
+                    <input type="Email" name="email" value="{{profile.email | default_if_none:''}}" required>
+                    <label for="Mobile">Mobile No</label>
+                    <input type="text" name="mobile" value="{{profile.mobile | default_if_none:''}}">
+                    <label for="ID">Student ID (Unchangeable)</label>
+                    <input type="text" name="student_id" value="{{profile.student | default_if_none:''}}" readonly>
+                    <label for="password">New Password (If want to change)</label>
+                    <input type="password" name="password1">
+                    <label for="password">Retype New Password</label>
+                    <input type="password" name="password2">
+                    <label for="Department">Department (Unchangeable)</label>
+                    <input type="text" name="department" value="{{profile.department | default_if_none:''}}"readonly>
+                    <label for="First_Name">Intake (Unchangeable)</label>
+                    <input type="text" name="intake" value="{{profile.intake | default_if_none:''}}" readonly>
+                    <label for="First_Name">Section (Unchangeable)</label>
+                    <input type="text" name="section" value="{{profile.section | default_if_none:''}}" readonly>
+                    <input type="submit" name="registration_form" value="Update" class="submit">
+                </form>
+            </div>
+        </div> <!-- ua container end -->
+    </div>
+</div> <!-- Index page end -->
+{% endblock %}
+
+{% block scripts %}
+<!-- slider image -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"> </script>
+<script>
+    $(document).ready(function () {
+        $(".carousel-inner").owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                600: {
+                    items: 1,
+                },
+                1000: {
+                    items: 1,
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

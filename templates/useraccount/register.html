@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %} Register | E-Learning {% endblock %}
+
+{% block page %}
+<!-- page -->
+<div class="page">
+    <div class="container">
+        <div class="useraccount-container">
+            <div class="ua-quote register-form">
+                <h2>Student Registration</h2>
+                {% if messages %}
+                <ul class="form-message">
+                    {% for item in messages %}
+                    <li class="{{ item.tags }}"> {{ item }} </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
+                    <label for="First_Name">First Name*</label>
+                    <input type="text" name="first_name" required>
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name">
+                    <label for="email">Email*</label>
+                    <input type="Email" name="email" required>
+                    <label for="password">Password*</label>
+                    <input type="password" name="password1" required>
+                    <label for="password">Retype Password*</label>
+                    <input type="password" name="password2" required>
+                    <label for="Mobile">Mobile No</label>
+                    <input type="text" name="mobile">
+                    <label for="ID">Student ID*</label>
+                    <input type="text" name="student_id" required>
+                    <label for="Department">Department*</label>
+                    <select name="department" id="">
+                        {% for item in department %}
+                        <option value="{{item.id}}">{{item.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="First_Name">Intake*</label>
+                    <input type="text" name="intake" required>
+                    <label for="First_Name">Section*</label>
+                    <input type="text" name="section" required>
+                    <input type="submit" name="registration_form" value="Register" class="submit">
+                </form>
+            </div>
+        </div> <!-- ua container end -->
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Quiz | E-Learning {% endblock %}
+{% block heads %}
+<link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet" />
+
+<style>
+    #page-wrap {
+        width: 100%;
+    }
+
+    #quiz input {
+        vertical-align: middle;
+    }
+
+    #quiz ol {
+        margin: 0 0 10px 20px;
+    }
+
+    #quiz ol li {
+        margin: 0 0 30px 0;
+    }
+
+    #quiz ol li div {
+        padding: 4px 0;
+    }
+
+    #quiz h3 {
+        font-size: 15px;
+        margin: 0 0 1px 0;
+        color: #666;
+    }
+
+    #results {
+        font: 44px Georgia, Serif;
+    }
+</style>
+{% endblock %}
+
+{% block page %}
+<!-- Index Page start -->
+<div class="page">
+    <div class="container">
+        <div class="classroom">
+            <a href="{% url 'smartbook' course_id=course_id topics_id=1 %}" class="unibutton">Smartbook</a>
+            <a href="{% url 'video' course_id=course_id  topics_id=1 %}" class="unibutton">Video</a>
+            <a href="{% url 'quiz' course_id=course_id  exam_type='mid-term' %}" class="unibutton">Quiz</a>
+            <div class="classroom-wrapper">
+                <div class="class-topics">
+                    <ul class="smartbook-list">
+                        <a href="{% url 'quiz' course_id=course_id exam_type='mid-term' %}">
+                            <li>Mid-Term Examination</li>
+                        </a>
+                        <a href="{% url 'quiz' course_id=course_id exam_type='final' %}">
+                            <li>Final Examination</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="class-content">
+
+                    <h4>{{exam_type}} Examination:</h4>
+                    <div id="page-wrap">
+
+                        <form action="{% url 'examprocess' course_id=course_id exam_type=exam_type %}" method="post"
+                            id="quiz">
+                            {% csrf_token %}
+                            <ol>
+                                {% for item in result %}
+                                <li>
+                                    <h3>{{forloop.counter}}. {{item.question}}</h3>
+                                    <div>
+                                        <input type="radio" name="{{item.id}}" id="question-1-answers-A" value="1"
+                                            required />
+                                        {% if item.answer_no == 1 %}
+                                        <label for="question-1-answers-A" style="color:green;">A) {{item.choice_1}}
+                                        </label>
+                                        {% else %}
+                                        <label for="question-1-answers-A">A) {{item.choice_1}}
+                                        </label>
+                                        {% endif %}
+                                    </div>
+
+                                    <div>
+                                        <input type="radio" name="{{item.id}}" id="question-1-answers-B" value="2"
+                                            required />
+                                        {% if item.answer_no == 2 %}
+                                        <label for="question-1-answers-B" style="color:green;">B) {{item.choice_2}}
+                                        </label>
+                                        {% else %}
+                                        <label for="question-1-answers-B">B) {{item.choice_2}}
+                                        </label>
+                                        {% endif %}
+                                    </div>
+
+                                    <div>
+                                        <input type="radio" name="{{item.id}}" id="question-1-answers-C" value="3"
+                                            required />
+                                        {% if item.answer_no == 3 %}
+                                        <label for="question-1-answers-C" style="color:green;">C)
+                                            {{item.choice_3}}</label>
+                                        {% else %}
+                                        <label for="question-1-answers-C">C) {{item.choice_3}}
+                                            {% endif %}
+                                    </div>
+
+                                    <div>
+                                        <input type="radio" name="{{item.id}}" id="question-1-answers-D" value="4"
+                                            required />
+                                        {% if item.answer_no == 4 %}
+                                        <label for="question-1-answers-D" style="color:green;">D)
+                                            {{item.choice_4}}</label>
+                                        {% else %}
+                                        <label for="question-1-answers-D">D)
+                                            {{item.choice_4}}</label>
+                                        {% endif %}
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ol>
+                            <input type="submit" class="submit" value="Submit Exam"
+                                style="margin-left:30px;width:150px!important;padding:10px;background:#292D3E;" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- Index page end -->
+{% endblock %}
+
+{% block scripts %}
+<!-- slider image -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"> </script>
+<script>
+    $(document).ready(function () {
+        $(".carousel-inner").owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                600: {
+                    items: 1,
+                },
+                1000: {
+                    items: 1,
+                }
+            }
+        });
+    });
+</script>
+
+{% if messages %}
+{% for item in messages %}
+<script type='text/javascript'>alert('{{item}}');</script>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

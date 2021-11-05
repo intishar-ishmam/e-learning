@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} Login | E-Learning {% endblock %}
+
+
+    {% block page %}
+    <!-- page -->
+    <div class="page">
+        <div class="container">
+            <div class="useraccount-container">
+                <div class="ua-quote register-form">
+                    <h2>Student Log in</h2>
+                    {% if messages %}
+                    <ul class="form-message">
+                        {% for item in messages %}
+                                <li class="{{ item.tags }}"> {{ item }} </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <form action="{% url 'login' %}"  method="post">
+                        {% csrf_token %}
+                        <label for="ID">Student ID</label>
+                        <input type="text" name="student_id" required>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" required>
+                        <input type="submit" name="submit" value="LOGIN" class="submit">
+                        <a href="{% url 'register' %}" class="create_link">Create new account</a>
+                    </form>
+                </div>
+            </div> <!-- ua container end -->
+        </div>
+    </div>
+    {% endblock %}
