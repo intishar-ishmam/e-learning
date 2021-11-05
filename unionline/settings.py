@@ -151,3 +151,5 @@ CKEDITOR_CONFIGS = {
        'extraPlugins': 'justify,liststyle,indent',
    },
 }
+
+

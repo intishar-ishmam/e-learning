@@ -26,6 +26,7 @@ def check_required(request, fields):
 
 
 #Set field to value or None for Null in db
+
 def set_validate(request, field, sanitize):
     strings = ["\'", "\"", ";", ">", "<", "/", "(", ")", "{", "}"]
     try:
@@ -100,7 +101,6 @@ def register(request):
             messages.error(request, "A student already registerd with this ID!")
             return redirect('register')
 
-        #Inserting user in db
         dept = set_validate(request, 'department', sanitize=False)
         S = Students (
             student = set_validate(request, 'student_id', sanitize=True),
@@ -227,7 +227,7 @@ def examprocess(request, course_id, exam_type):
     enroll = Enroll.objects.filter(student=student_id, course=course_id).order_by('-id')[:1]
     if exam_type == 'mid-term':
         for item in enroll:
-            if item.mid_term_marks != None:
+            if item.mid_term_marks is not None:
                 messages.error(request, "You have already done this examination.")
                 return redirect('quiz',course_id=course_id,exam_type=exam_type)
     if exam_type == 'final':
