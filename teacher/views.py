@@ -172,5 +172,25 @@ def smartbook_delete(request, smartbook_id, course_id):
         return redirect('smartbook-display', course_id=course_id)
 
 
-def quiz_display(request):
-    return None
+def quiz_display(request, course_id):
+    quiz = Quiz.objects.filter(course_id=course_id).order_by('exam_type')
+    return render(request, 'teacher/quiz-display.html', {"quiz": quiz, "course_id": course_id})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

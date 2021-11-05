@@ -564,7 +564,7 @@ p.p-s-name {
 }
 .left-right-image h3 {
     border-bottom: 1px solid #13355B;
-    padding-bottom: 10;
+    padding-bottom: 10px;
     display: inline-block;
 }
 
@@ -618,7 +618,7 @@ p.p-s-name {
     flex-wrap: wrap;
     width: 23%;
     min-width: 250px;
-    box-sizing: border-box;border-box;
+    box-sizing: border-box;
     border: 1px solid #EAEAEA;
     padding: 5px;
     cursor: pointer;
@@ -1101,7 +1101,7 @@ ul.form-message li.success {
 
 /* ------------------------------------------------------------- */
 
-*** FONTS ***/
+*** FONTS ***
 @import url(https://fonts.googleapis.com/css?family=Montserrat:900|Raleway:400,400i,700,700i);
 /*** VARIABLES ***/
 /* Colors */

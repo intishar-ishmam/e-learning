@@ -9,7 +9,7 @@
 <div class="page">
     <div class="container">
         <div class="basic-pricing">
-            <h2 class="t-border-btm">All Videos</h2>
+            <h2 class="t-border-btm">All Quizs</h2>
         {% if messages %}
                 <ul class="form-message" style="width:400px;">
                     {% for item in messages %}
@@ -19,18 +19,19 @@
                 {% endif %}
             <div class="basic-pricing-wrapper">
 
-                {% for item in videos %}
-                <div class="basic-p-item b-course" onclick="location.href='{% url 'video-edit' video_id=item.id course_id=course_id %}';">
+                {% for item in quiz %}
+                <div class="basic-p-item b-course" onclick="location.href='#';" style="height:200px;">
                     <div class="basic-p-item-title b-course-title">
-                        <h4>{{ item.title }}</h4>
+                        <h4>{{ item.question | slice:":100" }}...</h4>
                     </div>
-                    <div class="basic-p-item-image b-course-image">
-                        <img src="{% static 'image/video_edit.png' %}"
-                            alt="">
-                    </div>
+{#                    <div class="basic-p-item-image b-course-image">#}
+{#                        <img src="{% static 'image/quiz_edit.webp' %}"#}
+{#                            alt="">#}
+{#                    </div>#}
+                <p>{{ item.exam_type }}</p>
                 </div>
                 {% endfor %}
-            <div class="basic-p-item b-course" onclick="location.href='{% url 'video-add' course_id=course_id %}';">
+            <div class="basic-p-item b-course" onclick="location.href='#';">
                     <div class="basic-p-item-title b-course-title">
                         <h4>Add New Video</h4>
                     </div>
