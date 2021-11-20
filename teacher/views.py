@@ -216,7 +216,17 @@ def quiz_add(request, course_id):
         return redirect('quiz-display', course_id=course_id)
 
 
+def quiz_delete(request, quiz_id, course_id):
+    if not logged_in(request):
+        return redirect('teacher-login')
 
+    try:
+        Quiz.objects.get(pk=quiz_id).delete()
+        messages.success(request, "Quiz deleted")
+        return redirect('quiz-display', course_id=course_id)
+    except:
+        messages.error(request, "Quiz not found")
+        return redirect('quiz-display', course_id=course_id)
 
 
 
