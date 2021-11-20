@@ -14,4 +14,7 @@ urlpatterns = [
     path('smartbook-add/<int:course_id>', views.smartbook_add, name='smartbook-add'),
     path('smartbook-delete/<int:smartbook_id>/<int:course_id>', views.smartbook_delete, name='smartbook-delete'),
     path('quiz-display/<int:course_id>', views.quiz_display, name='quiz-display'),
+    path('quiz-edit/<int:quiz_id>/<int:course_id>', views.quiz_edit, name='quiz-edit'),
+    path('quiz-add/<int:course_id>', views.quiz_add, name='quiz-add'),
+
 ]

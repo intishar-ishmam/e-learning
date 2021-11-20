@@ -21,6 +21,13 @@
         </div> -->
         <div class="basic-pricing">
             <h2 class="t-border-btm">My Courses</h2>
+        {% if messages %}
+                    <ul class="form-message" style="width:400px;">
+                        {% for item in messages %}
+                                <li class="{{ item.tags }}"> {{ item }} </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
             <div class="basic-pricing-wrapper">
                 {% for item in courses %}
                 <div class="basic-p-item b-course" onclick="location.href='{% url 'select-module' course_id=item.id %}'">

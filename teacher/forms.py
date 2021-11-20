@@ -27,4 +27,7 @@ class SmartbookContentForm(ModelForm):
 class QuizForm(ModelForm):
     class Meta:
         model = Quiz
-        fields = '__all__'
+        fields = ['exam_type', 'question', 'choice_1', 'choice_2', 'choice_3', 'choice_4', 'answer_no']
+
+
+

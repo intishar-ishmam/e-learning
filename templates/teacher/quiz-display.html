@@ -1,6 +1,6 @@
 {% extends 'teacher/base.html' %}
 {% load static %}
-{% block title %} Edit | E-Learning {% endblock %}
+{% block title %} Quiz | E-Learning {% endblock %}
 {% block heads %}
 {% endblock %}
 
@@ -20,7 +20,7 @@
             <div class="basic-pricing-wrapper">
 
                 {% for item in quiz %}
-                <div class="basic-p-item b-course" onclick="location.href='#';" style="height:200px;">
+                <div class="basic-p-item b-course" onclick="location.href='{% url 'quiz-edit' quiz_id=item.id course_id=course_id %}';" style="height:200px;">
                     <div class="basic-p-item-title b-course-title">
                         <h4>{{ item.question | slice:":100" }}...</h4>
                     </div>
@@ -31,9 +31,9 @@
                 <p>{{ item.exam_type }}</p>
                 </div>
                 {% endfor %}
-            <div class="basic-p-item b-course" onclick="location.href='#';">
+            <div class="basic-p-item b-course" onclick="location.href='{% url 'quiz-add' course_id=course_id %}';">
                     <div class="basic-p-item-title b-course-title">
-                        <h4>Add New Video</h4>
+                        <h4>Add New Quiz</h4>
                     </div>
                     <div class="basic-p-item-image b-course-image">
                         <img src="{% static 'image/add.png' %}"

@@ -177,7 +177,43 @@ def quiz_display(request, course_id):
     return render(request, 'teacher/quiz-display.html', {"quiz": quiz, "course_id": course_id})
 
 
+def quiz_edit(request, quiz_id, course_id):
+    if not logged_in(request):
+        return redirect('teacher-login')
 
+    quiz = Quiz.objects.get(pk=quiz_id)
+    if request.method == 'GET':
+        form = QuizForm(instance=quiz)
+        return render(request, 'teacher/quiz-edit.html', {"quiz": quiz, "course_id": course_id, "form": form})
+
+    if request.method == 'POST':
+        form = QuizForm(request.POST, instance=quiz)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+        messages.success(request, "Quiz Updated")
+        return redirect('quiz-display', course_id=course_id)
+
+
+def quiz_add(request, course_id):
+    if not logged_in(request):
+        return redirect('teacher-login')
+
+    if request.method == 'GET':
+        form = QuizForm()
+        return render(request, 'teacher/quiz-add.html', {"course_id": course_id, "form": form})
+
+    if request.method == 'POST':
+        form = QuizForm(request.POST)
+        if form.is_valid():
+            q = form.save(commit=False)
+            q.course_id = course_id
+            q.save()
+        else:
+            print(form.errors)
+        messages.success(request, "Quiz Added")
+        return redirect('quiz-display', course_id=course_id)
 
 
 

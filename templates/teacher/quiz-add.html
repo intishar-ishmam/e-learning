@@ -1,0 +1,29 @@
+{% extends 'teacher/base.html' %}
+{% block title %} Quiz Edit | E-Learning {% endblock %}
+
+{% block page %}
+<!-- page -->
+<div class="page">
+    <div class="container">
+        <div class="">
+            <div class="ua-quote register-form" style="max-width: 100%;">
+                <h2>Quiz Add</h2>
+                {% if messages %}
+                <ul class="form-message">
+                    {% for item in messages %}
+                    <li class="{{ item.tags }}"> {{ item }} </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="{% url 'quiz-add' course_id=course_id %}" method="post">
+                    <input type="hidden" name="course_id" value="quiz.course">
+                    {{ form | safe}}
+                    <input type="submit" class="submit" value="Submit">
+                </form>
+            </div>
+        <br>
+{#            <a href="{% url 'smartbook-delete' smartbook_id=smartbook.id course_id=course_id %}"><h4 style="color:#ee0000; float:right">Delete</h4></a>#}
+        </div> <!-- ua container end -->
+    </div>
+</div>
+{% endblock %}
